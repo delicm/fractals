@@ -1,0 +1,3 @@
+/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/build/CMakeFiles/fractal_main.dir
+/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/build/CMakeFiles/edit_cache.dir
+/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/build/CMakeFiles/rebuild_cache.dir
