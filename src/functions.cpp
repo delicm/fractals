@@ -28,10 +28,9 @@ sf::Color Fractal<WIDTH, HEIGHT>::cm_blackwhite(const int depth) {
 
 template<int WIDTH, int HEIGHT>
 sf::Color Fractal<WIDTH, HEIGHT>::cm_heatgrad(const int depth) {
-    float pct_max = (float) depth / m_iterlim;
-    sf::Uint8 red = (sf::Uint8) 255 * pct_max;
-    sf::Uint8 blue = 255 - red;
-    return sf::Color(red, 50, blue);
+    float pct = (float) depth / m_iterlim;
+    sf::Uint8 intensity = (sf::Uint8) 255 * pct;
+    return sf::Color(intensity, intensity, intensity);
 }
 
 

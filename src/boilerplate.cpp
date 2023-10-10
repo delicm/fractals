@@ -28,8 +28,8 @@ void Fractal<WIDTH, HEIGHT>::set_iter(const int max_iter) {
 template<int WIDTH, int HEIGHT>
 inline complex Fractal<WIDTH, HEIGHT>::get_cplx_num(const int row, const int col) {
     return {
-        .real = (col - WIDTH/2) * m_resolution,
-        .imag = (HEIGHT/2 - row) * m_resolution
+        .real = (col - WIDTH/2) * m_resolution + m_center.real,
+        .imag = (HEIGHT/2 - row) * m_resolution + m_center.imag
     };
 }
 
@@ -60,18 +60,40 @@ void Fractal<WIDTH, HEIGHT>::set_func(ApplyFunction f) {
 template<int WIDTH, int HEIGHT>
 void Fractal<WIDTH, HEIGHT>::set_colf(ColorFunction f) {
     switch (f) {
-        case red_gradient:
+        case heatgrad:
         m_col = std::bind(&Fractal<WIDTH, HEIGHT>::cm_heatgrad, this, std::placeholders::_1);
+        m_current_colorf = heatgrad;
         break;
 
         case multicolor:
         m_col = std::bind(&Fractal<WIDTH, HEIGHT>::cm_multicolor, this, std::placeholders::_1);
+        m_current_colorf = multicolor;
         break;
 
         default:
         m_col = std::bind(&Fractal<WIDTH, HEIGHT>::cm_blackwhite, this, std::placeholders::_1);
+        m_current_colorf = black_white;
+        break;
     }
 }
+
+
+template<int WIDTH, int HEIGHT>
+void Fractal<WIDTH, HEIGHT>::set_center(complex center) {
+    m_center = center;
+}
+
+
+template<int WIDTH, int HEIGHT>
+CPLX_TYPE Fractal<WIDTH, HEIGHT>::get_radius() {
+    return m_radius;
+}
+
+template<int WIDTH, int HEIGHT>
+ColorFunction Fractal<WIDTH, HEIGHT>::get_colorf() {
+    return m_current_colorf;
+}
+
 
 
 /***************************************************************************************

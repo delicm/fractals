@@ -975,6 +975,7 @@ CMakeFiles/fractal_main.dir/src/functions.cpp.o: /home/mdelic/Main/Programs/Pers
 
 CMakeFiles/fractal_main.dir/src/main.cpp.o: /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/main.cpp \
   /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/boilerplate.cpp \
+  /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/examples.hpp \
   /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/fractal.cpp \
   /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/fractal.hpp \
   /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/functions.cpp \
@@ -1159,6 +1160,7 @@ CMakeFiles/fractal_main.dir/src/main.cpp.o: /home/mdelic/Main/Programs/PersonalP
   /usr/include/c++/13.2.1/bits/hashtable_policy.h \
   /usr/include/c++/13.2.1/bits/invoke.h \
   /usr/include/c++/13.2.1/bits/ios_base.h \
+  /usr/include/c++/13.2.1/bits/istream.tcc \
   /usr/include/c++/13.2.1/bits/locale_classes.h \
   /usr/include/c++/13.2.1/bits/locale_classes.tcc \
   /usr/include/c++/13.2.1/bits/locale_conv.h \
@@ -1240,6 +1242,8 @@ CMakeFiles/fractal_main.dir/src/main.cpp.o: /home/mdelic/Main/Programs/PersonalP
   /usr/include/c++/13.2.1/initializer_list \
   /usr/include/c++/13.2.1/ios \
   /usr/include/c++/13.2.1/iosfwd \
+  /usr/include/c++/13.2.1/iostream \
+  /usr/include/c++/13.2.1/istream \
   /usr/include/c++/13.2.1/iterator \
   /usr/include/c++/13.2.1/limits \
   /usr/include/c++/13.2.1/locale \
@@ -1315,6 +1319,10 @@ CMakeFiles/fractal_main.dir/src/main.cpp.o: /home/mdelic/Main/Programs/PersonalP
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h
 
+
+/usr/include/c++/13.2.1/istream:
+
+/usr/include/c++/13.2.1/bits/istream.tcc:
 
 /home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/fractal.hpp:
 
@@ -1493,6 +1501,8 @@ CMakeFiles/fractal_main.dir/src/main.cpp.o: /home/mdelic/Main/Programs/PersonalP
 /usr/include/bits/floatn.h:
 
 /usr/include/bits/cpu-set.h:
+
+/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/examples.hpp:
 
 /usr/include/c++/13.2.1/bits/enable_special_members.h:
 
@@ -1793,6 +1803,8 @@ CMakeFiles/fractal_main.dir/src/main.cpp.o: /home/mdelic/Main/Programs/PersonalP
 /usr/include/bits/types/locale_t.h:
 
 /usr/include/c++/13.2.1/bits/allocator.h:
+
+/usr/include/c++/13.2.1/iostream:
 
 /usr/include/bits/types/mbstate_t.h:
 

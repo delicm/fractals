@@ -19,6 +19,8 @@ Fractal<WIDTH, HEIGHT>::Fractal(
     m_func = std::bind(&Fractal<WIDTH, HEIGHT>::f_std, this, std::placeholders::_1);
     m_col = std::bind(&Fractal<WIDTH, HEIGHT>::cm_blackwhite, this, std::placeholders::_1);
     m_radius = m_resolution * std::max(HEIGHT, WIDTH) / 2;
+
+    m_current_colorf = black_white;
 }
 
 

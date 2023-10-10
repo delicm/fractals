@@ -1,106 +1,120 @@
-#include <string>
-
 #include "fractal.hpp"
+#include "examples.hpp"
 
-void test_display_fractal(
-    const int iter = 100,
-    complex c = {-0.5251993, -0.5251993}
+#include <iostream>
+#define LOG(x) std::cout << x << std::endl
+
+const int WIDTH = 1920;
+const int HEIGHT = 1080;
+
+
+void refresh_image(Fractal<WIDTH, HEIGHT> &fractal, sf::Texture &texture, sf::Sprite &sprite) {
+    texture.loadFromImage(fractal.get_sfml_image());
+    sprite = sf::Sprite(texture);
+    LOG("Image reloaded");
+}
+
+
+void handle_key_press(
+    sf::RenderWindow &window,
+    sf::Event &event,
+    Fractal<WIDTH, HEIGHT> &fractal,
+    sf::Texture &texture,
+    sf::Sprite &sprite
 )
 {
-
-    printf("Load fractal\n");
-    const int width = 1920;
-    const int height = 1080;
-
-    Fractal<width, height> fractal(c);
-
-    fractal.set_iter(iter);
-    fractal.set_radius(1);
-    fractal.set_colf(multicolor);
-
-    /**********************************************/
-
-    printf("Processing image\n");
-    fractal.process_img();
-
-    printf("Load image into SFML\n");
-    sf::Image image = fractal.get_sfml_image();
-
-    sf::Texture texture;
-    texture.loadFromImage(image);
-
-    sf::Sprite sprite(texture);
-
-    printf("Open window\n");
-    sf::RenderWindow window(sf::VideoMode(width, height), "Fractal");
-
-    while (window.isOpen())
+    switch (event.key.code)
     {
+    case sf::Keyboard::Add:
+        fractal.set_radius(fractal.get_radius() * 0.9);
+        fractal.process_img();
+        refresh_image(fractal, texture, sprite);
+        LOG("Zoom in executed");
+        break;
+
+    case sf::Keyboard::Subtract:
+        fractal.set_radius(fractal.get_radius() / 0.9);
+        fractal.process_img();
+        refresh_image(fractal, texture, sprite);
+        LOG("Zoom out executed");
+        break;
+
+    case sf::Keyboard::Multiply:
+        fractal.set_colf(static_cast<ColorFunction>(
+            (fractal.get_colorf() + 1) % COLORFCOUNT
+        ));
+        fractal.process_img();
+        refresh_image(fractal, texture, sprite);
+        LOG("Color scheme changed");
+        break;
+
+    default:
+        break;
+    }
+}
+
+
+void handle_event(
+    sf::RenderWindow &window,
+    sf::Event &event,
+    Fractal<WIDTH, HEIGHT> &fractal,
+    sf::Texture &texture,
+    sf::Sprite &sprite
+)
+{
+    while (window.pollEvent(event)) {
+    switch (event.type)
+    {
+        case sf::Event::Closed:
+            window.close();
+            LOG("Window closed");
+            break;
+
+        case sf::Event::KeyPressed:
+            handle_key_press(window, event, fractal, texture, sprite);
+
+        default:
+            break;
+    }
+    }
+}
+
+
+void display_fractal() {
+
+    Fractal fractal (frac_example::basic, 250);
+    fractal.set_radius();
+    LOG("Fractal loaded");
+
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Fractal", sf::Style::Fullscreen);
+    window.setFramerateLimit(60);
+    window.setKeyRepeatEnabled(false);
+    LOG("Window loaded");
+
+    sf::Texture fractal_texture;
+    sf::Sprite fractal_sprite;
+    fractal.process_img();
+    refresh_image(fractal, fractal_texture, fractal_sprite);
+    LOG("Initial render complete");
+
+    while (window.isOpen()){
+        
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
-        }
+        handle_event(window, event, fractal, fractal_texture, fractal_sprite);
 
         window.clear();
-
-        window.draw(sprite);
-
+        window.draw(fractal_sprite);
         window.display();
     }
-
-    printf("Window closed\n");
-
+    
 }
 
 
-void generate_img(
-    std::string name,
-    const int iter = 100,
-    complex c = {-0.5251993, -0.5251993}
-)
-{
-    const int width = 1920;
-    const int height = 1080;
 
-    Fractal<width, height> fractal(c);
-
-    fractal.set_iter(iter);
-    fractal.set_radius(1);
-    fractal.set_colf(multicolor);
-
-    fractal.process_img();
-
-    sf::Image image = fractal.get_sfml_image();
-
-    image.saveToFile("../images/" + name + ".png");
-
-}
 
 
 int main() {
 
-    int iters = 300;
-
-    complex c1 = {
-        .real = -0.8,
-        .imag = 0.156
-    };
-
-    complex c2 = {
-        .real = -0.835,
-        .imag = -0.2321
-    };
-
-    complex c3 = {
-        .real = -0.7269,
-        .imag = 0.1889
-    };
-
-    test_display_fractal(iters, c1);
-    // generate_img("logtrick", iters, c3);
+    display_fractal();
 
 }

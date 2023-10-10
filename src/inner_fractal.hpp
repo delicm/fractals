@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <functional>
 
+/************************************************************/
+
 #define CPLX_TYPE float
 
 typedef struct {
@@ -11,15 +13,20 @@ typedef struct {
     CPLX_TYPE imag;
 } complex;
 
+const int APPLYFCOUNT = 1;
 enum ApplyFunction {
     standard
 };
 
+const int COLORFCOUNT = 3;
 enum ColorFunction {
     black_white,
-    red_gradient,
+    heatgrad,
     multicolor
 };
+
+
+/************************************************************/
 
 
 inline CPLX_TYPE norm(const complex number);
@@ -30,8 +37,10 @@ private:
     int m_iterlim;
     sf::Uint8* m_img;
     complex m_julia;
+    complex m_center = {0, 0};
     CPLX_TYPE m_resolution;
     CPLX_TYPE m_radius;
+    ColorFunction m_current_colorf;
 
     std::function<complex(complex)> m_func;
     std::function<sf::Color(int)> m_col;
@@ -59,6 +68,10 @@ public:
     void set_radius();
     void set_func(ApplyFunction f);
     void set_colf(ColorFunction f);
+    void set_center(complex center);
+
+    CPLX_TYPE get_radius();
+    ColorFunction get_colorf();
 
     // Processing
     int gauge_depth(const complex start);
