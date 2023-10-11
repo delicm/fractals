@@ -6,7 +6,7 @@
 
 
 template<int WIDTH, int HEIGHT>
-complex Fractal<WIDTH, HEIGHT>::f_std(const complex z) {
+inline complex Fractal<WIDTH, HEIGHT>::f_std(const complex z) {
     return (complex) {
         .real = z.real*z.real - z.imag*z.imag + m_julia.real,
         .imag = 2*z.real*z.imag + m_julia.imag

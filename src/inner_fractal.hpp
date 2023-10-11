@@ -26,6 +26,16 @@ enum ColorFunction {
 };
 
 
+const int EXCOUNT = 5;
+enum FractalExample {
+    flower,
+    spiralflower,
+    thin,
+    detailed,
+    basic
+};
+
+
 /************************************************************/
 
 
@@ -35,17 +45,22 @@ template <int WIDTH = 1920, int HEIGHT = 1080>
 class Fractal {
 private:
     int m_iterlim;
-    sf::Uint8* m_img;
-    complex m_julia;
-    complex m_center = {0, 0};
     CPLX_TYPE m_resolution;
     CPLX_TYPE m_radius;
+    complex m_julia;
+    complex m_center = {0, 0};
+
+    int* m_depth;
+    sf::Uint8* m_img;
+
     ColorFunction m_current_colorf;
+    FractalExample m_current_example;
+    ApplyFunction m_current_func;
 
     std::function<complex(complex)> m_func;
     std::function<sf::Color(int)> m_col;
 
-    complex f_std(const complex z);
+    inline complex f_std(const complex z);
     sf::Color cm_blackwhite(int depth);
     sf::Color cm_heatgrad(int depth);
     sf::Color cm_multicolor(int depth);
@@ -60,7 +75,6 @@ public:
 
     ~Fractal();
 
-    inline void set_pixel(const int row, const int col, const int val);
     void set_c(const complex c);
     void set_res(const CPLX_TYPE res);
     void set_iter(const int max_iter);
@@ -70,13 +84,29 @@ public:
     void set_colf(ColorFunction f);
     void set_center(complex center);
 
+    void load_example(FractalExample example);
+
     CPLX_TYPE get_radius();
     ColorFunction get_colorf();
+    FractalExample get_example();
+    ApplyFunction get_func();
+    int get_iterlim();
 
-    // Processing
+    // Main Processing
+    inline void set_pixel(const int row, const int col, const int val);
     int gauge_depth(const complex start);
+    void processing_core(int rstart, int rend, int cstart, int cend);
+    
+    inline void process_img();
+
     inline complex get_cplx_num(const int row, const int col);
-    void process_img();
+
+    // Interaction helpers
+    void reprocess_colors();
+    void shift_down();
+    void shift_up();
+    void shift_left();
+    void shift_right();
 
     // SFML communications
     sf::Image get_sfml_image();

@@ -9,6 +9,7 @@ set(SOURCES
     src/boilerplate.cpp
     src/functions.cpp
     src/fractal.cpp
+    src/interactions.cpp
     src/main.cpp
 )
 

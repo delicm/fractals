@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/fractal_main.dir/src/fractal.cpp.o.d"
   "CMakeFiles/fractal_main.dir/src/functions.cpp.o"
   "CMakeFiles/fractal_main.dir/src/functions.cpp.o.d"
+  "CMakeFiles/fractal_main.dir/src/interactions.cpp.o"
+  "CMakeFiles/fractal_main.dir/src/interactions.cpp.o.d"
   "CMakeFiles/fractal_main.dir/src/main.cpp.o"
   "CMakeFiles/fractal_main.dir/src/main.cpp.o.d"
 )

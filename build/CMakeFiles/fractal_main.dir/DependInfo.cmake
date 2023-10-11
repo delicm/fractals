@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/boilerplate.cpp" "CMakeFiles/fractal_main.dir/src/boilerplate.cpp.o" "gcc" "CMakeFiles/fractal_main.dir/src/boilerplate.cpp.o.d"
   "/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/fractal.cpp" "CMakeFiles/fractal_main.dir/src/fractal.cpp.o" "gcc" "CMakeFiles/fractal_main.dir/src/fractal.cpp.o.d"
   "/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/functions.cpp" "CMakeFiles/fractal_main.dir/src/functions.cpp.o" "gcc" "CMakeFiles/fractal_main.dir/src/functions.cpp.o.d"
+  "/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/interactions.cpp" "CMakeFiles/fractal_main.dir/src/interactions.cpp.o" "gcc" "CMakeFiles/fractal_main.dir/src/interactions.cpp.o.d"
   "/home/mdelic/Main/Programs/PersonalProjects/Fractal-C/src/main.cpp" "CMakeFiles/fractal_main.dir/src/main.cpp.o" "gcc" "CMakeFiles/fractal_main.dir/src/main.cpp.o.d"
   )
 

@@ -1,12 +1,10 @@
 #include "fractal.hpp"
-#include "examples.hpp"
 
 #include <iostream>
 #define LOG(x) std::cout << x << std::endl
 
 const int WIDTH = 1920;
 const int HEIGHT = 1080;
-
 
 void refresh_image(Fractal<WIDTH, HEIGHT> &fractal, sf::Texture &texture, sf::Sprite &sprite) {
     texture.loadFromImage(fractal.get_sfml_image());
@@ -43,10 +41,62 @@ void handle_key_press(
         fractal.set_colf(static_cast<ColorFunction>(
             (fractal.get_colorf() + 1) % COLORFCOUNT
         ));
-        fractal.process_img();
+        fractal.reprocess_colors();
         refresh_image(fractal, texture, sprite);
         LOG("Color scheme changed");
         break;
+
+    case sf::Keyboard::Down:
+        fractal.shift_down();
+        refresh_image(fractal, texture, sprite);
+        LOG("Shifted down");
+        break;
+
+    case sf::Keyboard::Up:
+        fractal.shift_up();
+        refresh_image(fractal, texture, sprite);
+        LOG("Shifted up");
+        break;
+
+    case sf::Keyboard::Left:
+        fractal.shift_left();
+        refresh_image(fractal, texture, sprite);
+        LOG("Shifted left");
+        break;
+
+    case sf::Keyboard::Right:
+        fractal.shift_right();
+        refresh_image(fractal, texture, sprite);
+        LOG("Shifted right");
+        break;
+
+    case sf::Keyboard::Divide:
+        fractal.load_example(static_cast<FractalExample>(
+            (fractal.get_example() + 1) % EXCOUNT
+        ));
+        fractal.process_img();
+        refresh_image(fractal, texture, sprite);
+        LOG("Switched example");
+        break;
+
+    case sf::Keyboard::D:
+        fractal.set_iter(
+            50 + (fractal.get_iterlim() + 100) % 400
+        );
+        fractal.process_img();
+        refresh_image(fractal, texture, sprite);
+        LOG("Toggled iterlim (up)");
+        break;
+
+    case sf::Keyboard::A:
+        fractal.set_iter(
+            50 + (fractal.get_iterlim() + 300) % 400
+        );
+        fractal.process_img();
+        refresh_image(fractal, texture, sprite);
+        LOG("Toggled iterlim (down)");
+        break;
+
 
     default:
         break;
@@ -82,8 +132,11 @@ void handle_event(
 
 void display_fractal() {
 
-    Fractal fractal (frac_example::basic, 250);
+    Fractal fractal;
+    fractal.load_example(basic);
+    fractal.set_iter(250);
     fractal.set_radius();
+    fractal.set_colf(heatgrad);
     LOG("Fractal loaded");
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Fractal", sf::Style::Fullscreen);

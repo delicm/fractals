@@ -201,6 +201,30 @@ src/functions.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fractal_main.dir/build.make CMakeFiles/fractal_main.dir/src/functions.cpp.s
 .PHONY : src/functions.cpp.s
 
+src/interactions.o: src/interactions.cpp.o
+.PHONY : src/interactions.o
+
+# target to build an object file
+src/interactions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fractal_main.dir/build.make CMakeFiles/fractal_main.dir/src/interactions.cpp.o
+.PHONY : src/interactions.cpp.o
+
+src/interactions.i: src/interactions.cpp.i
+.PHONY : src/interactions.i
+
+# target to preprocess a source file
+src/interactions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fractal_main.dir/build.make CMakeFiles/fractal_main.dir/src/interactions.cpp.i
+.PHONY : src/interactions.cpp.i
+
+src/interactions.s: src/interactions.cpp.s
+.PHONY : src/interactions.s
+
+# target to generate assembly for a file
+src/interactions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fractal_main.dir/build.make CMakeFiles/fractal_main.dir/src/interactions.cpp.s
+.PHONY : src/interactions.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -243,6 +267,9 @@ help:
 	@echo "... src/functions.o"
 	@echo "... src/functions.i"
 	@echo "... src/functions.s"
+	@echo "... src/interactions.o"
+	@echo "... src/interactions.i"
+	@echo "... src/interactions.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -26,15 +26,6 @@ void Fractal<WIDTH, HEIGHT>::set_iter(const int max_iter) {
 
 
 template<int WIDTH, int HEIGHT>
-inline complex Fractal<WIDTH, HEIGHT>::get_cplx_num(const int row, const int col) {
-    return {
-        .real = (col - WIDTH/2) * m_resolution + m_center.real,
-        .imag = (HEIGHT/2 - row) * m_resolution + m_center.imag
-    };
-}
-
-
-template<int WIDTH, int HEIGHT>
 void Fractal<WIDTH, HEIGHT>::set_radius(const CPLX_TYPE radius) {
     m_radius = radius;
     m_resolution = 2 * radius / std::min(WIDTH, HEIGHT);
@@ -49,10 +40,21 @@ void Fractal<WIDTH, HEIGHT>::set_radius() {
 
 
 template<int WIDTH, int HEIGHT>
+void Fractal<WIDTH, HEIGHT>::set_center(complex center) {
+    m_center = center;
+}
+
+
+
+
+
+template<int WIDTH, int HEIGHT>
 void Fractal<WIDTH, HEIGHT>::set_func(ApplyFunction f) {
     switch (f) {
         default:
         m_func = std::bind(&Fractal<WIDTH, HEIGHT>::f_std, this, std::placeholders::_1);
+        m_current_func = standard;
+        break;
     }
 }
 
@@ -78,9 +80,19 @@ void Fractal<WIDTH, HEIGHT>::set_colf(ColorFunction f) {
 }
 
 
+
 template<int WIDTH, int HEIGHT>
-void Fractal<WIDTH, HEIGHT>::set_center(complex center) {
-    m_center = center;
+inline complex Fractal<WIDTH, HEIGHT>::get_cplx_num(const int row, const int col) {
+    return {
+        .real = (col - WIDTH/2) * m_resolution + m_center.real,
+        .imag = (HEIGHT/2 - row) * m_resolution + m_center.imag
+    };
+}
+
+
+template<int WIDTH, int HEIGHT>
+int Fractal<WIDTH, HEIGHT>::get_iterlim() {
+    return m_iterlim;
 }
 
 
@@ -89,10 +101,61 @@ CPLX_TYPE Fractal<WIDTH, HEIGHT>::get_radius() {
     return m_radius;
 }
 
+
 template<int WIDTH, int HEIGHT>
 ColorFunction Fractal<WIDTH, HEIGHT>::get_colorf() {
     return m_current_colorf;
 }
+
+
+template<int WIDTH, int HEIGHT>
+FractalExample Fractal<WIDTH, HEIGHT>::get_example() {
+    return m_current_example;
+}
+
+
+template<int WIDTH, int HEIGHT>
+ApplyFunction Fractal<WIDTH, HEIGHT>::get_func() {
+    return m_current_func;
+} 
+
+
+
+
+template<int WIDTH, int HEIGHT>
+void Fractal<WIDTH, HEIGHT>::load_example(FractalExample example) {
+    switch (example)
+    {
+    case flower:
+        set_c({-0.4, 0.6});
+        m_current_example = flower;
+        break;
+
+    case spiralflower:
+        set_c({0.285, 0.01});
+        m_current_example = spiralflower;
+        break;
+
+    case thin:
+        set_c({-0.835, -0.2321});
+        m_current_example = thin;
+        break;
+
+    case detailed:
+        set_c({-0.8, 0.156});
+        m_current_example = detailed;
+        break;
+
+    case basic:
+        set_c({-0.5251993, -0.5251993});
+        m_current_example = basic;
+        break;
+
+    default:
+        break;
+    }
+}
+
 
 
 
